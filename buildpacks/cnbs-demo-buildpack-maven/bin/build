@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+layersdir="$1"
+env_dir="$2/env"
+plan_path="$3"
+
+layerdir="$layersdir"/maven
+
+echo "---> MAVEN Buildpack layerdir=${layerdir}"
+
+mkdir -p "$layerdir"
+
+echo "---> Downloading and extracting JDK"
+mvn_url=https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
+wget -q -O - "$mvn_url" | tar -xzf - -C "$layerdir"
+
+echo -e '[types]\nlaunch = false' > "$layersdir/maven.toml"
+
+export PATH="$layerdir"/bin:$PATH
+
+exit 0

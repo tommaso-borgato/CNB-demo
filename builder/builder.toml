@@ -1,0 +1,36 @@
+# https://buildpacks.io/docs/operator-guide/create-a-builder/
+
+# Buildpacks to include in builder
+[[buildpacks]]
+uri = "/home/tborgato/Documents/CNB/CNB-demo/buildpacks/cnbs-demo-buildpack-jdk"
+
+[[buildpacks]]
+uri = "/home/tborgato/Documents/CNB/CNB-demo/buildpacks/cnbs-demo-buildpack-maven"
+
+[[buildpacks]]
+uri = "/home/tborgato/Documents/CNB/CNB-demo/buildpacks/cnbs-demo-buildpack-maven-build"
+
+# Order used for detection
+[[order]]
+    # This buildpack will display build-time information (as a dependency)
+    [[order.group]]
+    id = "cnbs-demo-buildpack/jdk"
+    version = "0.0.1"
+
+    # This buildpack will display build-time information (as a dependant)
+    [[order.group]]
+    id = "cnbs-demo-buildpack/maven"
+    version = "0.0.1"
+
+    # This buildpack will create a process type "sys-info" to display runtime information
+    [[order.group]]
+    id = "cnbs-demo-buildpack/maven-build"
+    version = "0.0.1"
+
+# Stack that will be used by the builder
+[stack]
+id = "cnbs.stack.demo.ubi"
+# This image is used at runtime
+run-image = "quay.io/tborgato/cnbs-stack-demo-run:ubi"
+# This image is used at build-time
+build-image = "quay.io/tborgato/cnbs-stack-demo-build:ubi"

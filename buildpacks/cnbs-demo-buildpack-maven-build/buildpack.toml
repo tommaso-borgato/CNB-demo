@@ -1,0 +1,9 @@
+# https://buildpacks.io/docs/buildpack-author-guide/create-buildpack
+api = "0.7"
+
+[buildpack]
+  id = "cnbs-demo-buildpack/maven-build"
+  version = "0.0.1"
+
+[[stacks]]
+  id = "cnbs.stack.demo.ubi"

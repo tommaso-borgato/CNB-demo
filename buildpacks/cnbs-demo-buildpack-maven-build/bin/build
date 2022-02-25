@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+layersdir="$1"
+env_dir="$2/env"
+plan_path="$3"
+
+layerdir="$layersdir"/maven-build
+
+echo "---> MAVEN Build Buildpack layerdir=${layerdir}"
+
+mkdir -p "$layerdir"
+
+mvn package
+cp target/ROOT.jar ${layerdir}/ROOT.jar
+
+echo -e '[types]\nlaunch = true' > "$layersdir/maven.toml"
+
+# Set default start command
+cat > "$layersdir/launch.toml" << EOL
+[[processes]]
+type = "web"
+command = "java -jar target/ROOT.jar"
+default = true
+EOL
+
+exit 0

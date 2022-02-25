@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+layersdir="$1"
+env_dir="$2/env"
+plan_path="$3"
+
+layerdir="$layersdir"/ruby
+
+echo "---> JDK Buildpack layerdir=${layerdir}"
+
+mkdir -p "$layerdir"
+
+echo "---> Downloading and extracting JDK"
+jdk_url=https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
+wget -q -O - "$jdk_url" | tar -xzf - -C "$layerdir"
+
+echo -e '[types]\nlaunch = true' > "$layersdir/jdk.toml"
+
+export PATH="$layerdir"/bin:$PATH
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}"$layerdir/lib"
+
+exit 0
