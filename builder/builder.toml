@@ -2,29 +2,29 @@
 
 # Buildpacks to include in builder
 [[buildpacks]]
-uri = "/home/tborgato/Documents/CNB/CNB-demo/buildpacks/cnbs-demo-buildpack-jdk"
-
-[[buildpacks]]
 uri = "/home/tborgato/Documents/CNB/CNB-demo/buildpacks/cnbs-demo-buildpack-maven"
 
 [[buildpacks]]
-uri = "/home/tborgato/Documents/CNB/CNB-demo/buildpacks/cnbs-demo-buildpack-maven-build"
+uri = "/home/tborgato/Documents/CNB/CNB-demo/buildpacks/cnbs-demo-buildpack-aux-1"
+
+[[buildpacks]]
+uri = "/home/tborgato/Documents/CNB/CNB-demo/buildpacks/cnbs-demo-buildpack-aux-2"
 
 # Order used for detection
 [[order]]
     # This buildpack will display build-time information (as a dependency)
     [[order.group]]
-    id = "cnbs-demo-buildpack/jdk"
+    id = "cnbs-demo-buildpack/maven"
     version = "0.0.1"
 
     # This buildpack will display build-time information (as a dependant)
     [[order.group]]
-    id = "cnbs-demo-buildpack/maven"
+    id = "cnbs-demo-buildpack/aux-1"
     version = "0.0.1"
 
     # This buildpack will create a process type "sys-info" to display runtime information
     [[order.group]]
-    id = "cnbs-demo-buildpack/maven-build"
+    id = "cnbs-demo-buildpack/aux-2"
     version = "0.0.1"
 
 # Stack that will be used by the builder

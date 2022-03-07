@@ -23,3 +23,6 @@ pack build demo-spring-boot --path ./demo --builder cnbs-demo-builder:ubi
 
 # run
 podman run -p 8080:8080 -it --rm demo-spring-boot
+
+# inspect
+podman exec -it 18ef486e8266 /bin/bash

@@ -1,7 +1,7 @@
 api = "0.7"
 
 [buildpack]
-  id = "cnbs-demo-buildpack/jdk"
+  id = "cnbs-demo-buildpack/aux-1"
   version = "0.0.1"
 
 [[stacks]]
